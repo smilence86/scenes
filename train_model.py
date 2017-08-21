@@ -8,7 +8,7 @@ dir = "./roads_128/";
 
 
 # # Parameters
-batch_size = 8
+batch_size = 10
 
 # # Network Parameters
 n_classes = 4 # MNIST total classes (0-9 digits)
@@ -100,7 +100,6 @@ saver = tf.train.Saver()
 # Launch the graph
 with tf.Session() as sess:
     sess.run(init)
-    step = 1
     # Keep training until reach max iterations
     list = os.listdir(dir)
     # print(list[1190:1120])
@@ -115,11 +114,13 @@ with tf.Session() as sess:
     print('总页数：', total_page);
     #训练批次
     count = 0
-    while count < 20:
+    total_count = 30
+    while count < total_count:
         count += 1;
         print("count:", count)
-        for batch_id in range(0, total_page):
-            batch = list[batch_id * 8:batch_id * 8 + 8]
+        step = 1
+        for index in range(0, total_page):
+            batch = list[index * batch_size:index * batch_size + batch_size]
             batch_xs = []
             batch_ys = []
             for image in batch:
@@ -152,7 +153,7 @@ with tf.Session() as sess:
                 loss, acc = sess.run([cost, accuracy], feed_dict={x: batch_xs,
                                                                   y_: batch_ys,
                                                                   keep_prob: 1.})
-                print("Iter " + str(step*batch_size) + ", Minibatch Loss= " + \
+                print("count:" + str(count) + "/" + str(total_count) + ", step:" + str(step) + "/" + str(total_imgs) + ", Minibatch Loss= " + \
                       "{:.6f}".format(loss) + ", Training Accuracy= " + \
                       "{:.5f}".format(acc))
             step += 1
