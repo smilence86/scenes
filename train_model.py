@@ -148,14 +148,13 @@ with tf.Session() as sess:
             print(batch_ys.shape)
 
             sess.run(optimizer, feed_dict={x: batch_xs, y_: batch_ys, keep_prob: dropout})
-            if step % 1 == 0:
-                # Calculate batch loss and accuracy
-                loss, acc = sess.run([cost, accuracy], feed_dict={x: batch_xs,
-                                                                  y_: batch_ys,
-                                                                  keep_prob: 1.})
-                print("count:" + str(count) + "/" + str(total_count) + ", step:" + str(step) + "/" + str(total_imgs) + ", Minibatch Loss= " + \
-                      "{:.6f}".format(loss) + ", Training Accuracy= " + \
-                      "{:.5f}".format(acc))
+            # Calculate batch loss and accuracy
+            loss, acc = sess.run([cost, accuracy], feed_dict={x: batch_xs,
+                                                              y_: batch_ys,
+                                                              keep_prob: 1.})
+            print("count:" + str(count) + "/" + str(total_count) + ", step:" + str(step) + "/" + str(total_page) + ", Minibatch Loss= " + \
+                  "{:.6f}".format(loss) + ", Training Accuracy= " + \
+                  "{:.5f}".format(acc))
             step += 1
     print("Optimization Finished!")
     saver.save(sess,"./model/model.ckpt")
