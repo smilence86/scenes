@@ -8,7 +8,7 @@ dir = "./roads_128/";
 
 
 # # Parameters
-batch_size = 10
+batch_size = 8
 
 # # Network Parameters
 n_classes = 4 # MNIST total classes (0-9 digits)
@@ -119,7 +119,7 @@ with tf.Session() as sess:
         count += 1;
         print("count:", count)
         for batch_id in range(0, total_page):
-            batch = list[batch_id * 10:batch_id * 10 + 10]
+            batch = list[batch_id * 8:batch_id * 8 + 8]
             batch_xs = []
             batch_ys = []
             for image in batch:
