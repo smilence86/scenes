@@ -148,7 +148,7 @@ with tf.Session() as sess:
             print(batch_ys.shape)
 
             sess.run(optimizer, feed_dict={x: batch_xs, y_: batch_ys, keep_prob: dropout})
-            if step % 3 == 0:
+            if step % 1 == 0:
                 # Calculate batch loss and accuracy
                 loss, acc = sess.run([cost, accuracy], feed_dict={x: batch_xs,
                                                                   y_: batch_ys,
