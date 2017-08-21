@@ -6,7 +6,7 @@ import numpy as np
 dir = "./roads_temp/";
 
 def gather_roads(url):
-	i = 35938;
+	i = 36966;
 	while True:
 		stream = ur.urlopen(url);
 		imgNp = np.array(bytearray(stream.read()), dtype=np.uint8);

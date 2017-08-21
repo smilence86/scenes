@@ -11,7 +11,7 @@ dir = "./roads_128/";
 batch_size = 10
 
 # # Network Parameters
-n_classes = 2 # MNIST total classes (0-9 digits)
+n_classes = 4 # MNIST total classes (0-9 digits)
 dropout = 0.75 # Dropout, probability to keep units
 
 # # tf Graph input
@@ -103,7 +103,7 @@ with tf.Session() as sess:
     step = 1
     # Keep training until reach max iterations
     list = os.listdir(dir)
-    print(list[1190:1120])
+    # print(list[1190:1120])
     print(len(list))
     total_imgs = len(list);
     print('总图片数：', total_imgs);
@@ -115,7 +115,7 @@ with tf.Session() as sess:
     print('总页数：', total_page);
     #训练批次
     count = 0
-    while count < 10:
+    while count < 20:
         count += 1;
         print("count:", count)
         for batch_id in range(0, total_page):
@@ -134,7 +134,7 @@ with tf.Session() as sess:
                 # print(img_ndarray.shape)
                 batch_x = img_ndarray
                 batch_xs.append(batch_x)
-                batch_y = np.asarray([0, 0])
+                batch_y = np.asarray([0, 0, 0, 0])
                 batch_y[int(score) - 1] = 1
                 # print(batch_y)
                 batch_y = np.reshape(batch_y, [2, ])
