@@ -137,7 +137,7 @@ with tf.Session() as sess:
                 batch_y = np.asarray([0, 0, 0, 0])
                 batch_y[int(score) - 1] = 1
                 # print(batch_y)
-                batch_y = np.reshape(batch_y, [2, ])
+                batch_y = np.reshape(batch_y, [4, ])
                 batch_ys.append(batch_y)
             # print(batch_xs)
             # print(batch_ys)
