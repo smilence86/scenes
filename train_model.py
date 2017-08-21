@@ -135,7 +135,7 @@ with tf.Session() as sess:
                 batch_x = img_ndarray
                 batch_xs.append(batch_x)
                 batch_y = np.asarray([0, 0, 0, 0])
-                batch_y[int(score) - 1] = 1
+                batch_y[int(score)] = 1
                 # print(batch_y)
                 batch_y = np.reshape(batch_y, [4, ])
                 batch_ys.append(batch_y)
