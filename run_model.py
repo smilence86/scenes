@@ -101,7 +101,7 @@ accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
 init = tf.global_variables_initializer()
 saver=tf.train.Saver()
 
-dir = "./roads_128/";
+dir = "./roads_test/";
 
 # # Launch the graph
 # with tf.Session() as sess:
@@ -201,11 +201,11 @@ def run_model(img, img_backup):
         ctime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S");
         if(0 in pred_result_test):
             print(ctime + ' 检测到特征图片：');
-            img_backup.show();
+            # img_backup.show();
             imgPath = './backup/' + ctime + '.jpg';
-            img_backup.save(imgPath);
+            # img_backup.save(imgPath);
             #打卡
-            punchIn(imgPath);
+            # punchIn(imgPath);
         else:
             print(ctime + ' .........');
             # img.show();
@@ -246,6 +246,6 @@ def recognition(url):
             break
 
 # recognition('http://192.168.43.1:8080/shot.jpg');
-recognition('http://172.20.10.2:8080/shot.jpg');
-# run_model('road_4230-0.jpg');
+# recognition('http://172.20.10.2:8080/shot.jpg');
+run_model('2017-08-14 14:52:53.jpg');
 # punchIn('./backup/2017-08-14 14:52:56.jpg');
