@@ -16,7 +16,7 @@ learning_rate = 0.001
 training_iters = 3000
 
 # Network Parameters
-n_classes = 2 # MNIST total classes (0-9 digits)
+n_classes = 4 # MNIST total classes (0-9 digits)
 dropout = 0.75 # Dropout, probability to keep units
 
 # tf Graph input
@@ -70,18 +70,18 @@ def conv_net(x, weights, biases, dropout):
 # Store layers weight & bias
 weights = {
     # 5x5 conv, 1 input, 32 outputs
-    'wc1': tf.Variable(tf.random_normal([5, 5, 3, 24])),
+    'wc1': tf.Variable(tf.random_normal([5, 5, 3, 16])),
     # 5x5 conv, 32 inputs, 64 outputs
-    'wc2': tf.Variable(tf.random_normal([5, 5, 24, 96])),
+    'wc2': tf.Variable(tf.random_normal([5, 5, 16, 48])),
     # fully connected, 7*7*64 inputs, 1024 outputs
-    'wd1': tf.Variable(tf.random_normal([32*24*96, 1024])),
+    'wd1': tf.Variable(tf.random_normal([32*24*48, 1024])),
     # 1024 inputs, 10 outputs (class prediction)
     'out': tf.Variable(tf.random_normal([1024, n_classes]))
 }
 
 biases = {
-    'bc1': tf.Variable(tf.random_normal([24])),
-    'bc2': tf.Variable(tf.random_normal([96])),
+    'bc1': tf.Variable(tf.random_normal([16])),
+    'bc2': tf.Variable(tf.random_normal([48])),
     'bd1': tf.Variable(tf.random_normal([1024])),
     'out': tf.Variable(tf.random_normal([n_classes]))
 }
