@@ -247,5 +247,5 @@ def recognition(url):
 
 # recognition('http://192.168.43.1:8080/shot.jpg');
 # recognition('http://172.20.10.2:8080/shot.jpg');
-run_model('2017-08-14 14:52:53.jpg');
+run_model('2017-08-14 14:52:53.jpg', None);
 # punchIn('./backup/2017-08-14 14:52:56.jpg');
