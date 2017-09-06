@@ -2,8 +2,8 @@ from __future__ import division
 import os
 import numpy as np
 from PIL import Image
-import tensorflow as tf
 import datetime
+import tensorflow as tf
 
 dir = "./roads_128/";
 
@@ -139,7 +139,7 @@ with tf.Session() as sess:
                 batch_y = np.asarray([0, 0, 0, 0, 0])
                 batch_y[int(score)] = 1
                 # print(batch_y)
-                batch_y = np.reshape(batch_y, [4, ])
+                batch_y = np.reshape(batch_y, [5, ])
                 batch_ys.append(batch_y)
             # print(batch_xs)
             # print(batch_ys)
@@ -150,9 +150,7 @@ with tf.Session() as sess:
 
             sess.run(optimizer, feed_dict={x: batch_xs, y_: batch_ys, keep_prob: dropout})
             # Calculate batch loss and accuracy
-            loss, acc = sess.run([cost, accuracy], feed_dict={x: batch_xs,
-                                                              y_: batch_ys,
-                                                              keep_prob: 1.})
+            loss, acc = sess.run([cost, accuracy], feed_dict={x: batch_xs, y_: batch_ys, keep_prob: 1.});
             ctime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S");
             print(ctime + "\tcount:" + str(count) + "/" + str(total_count) + ", step:" + str(step) + "/" + str(total_page) + ", Minibatch Loss= " + \
                   "{:.6f}".format(loss) + ", Training Accuracy= " + \
