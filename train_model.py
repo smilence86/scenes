@@ -131,6 +131,8 @@ with tf.Session() as sess:
                 print(image + '\tscore:' + score)
                 # print(type(score))
                 img = Image.open(dir + image)
+                row,col =  img.size;
+                print(row,col)
                 img_ndarray = np.asarray(img, dtype='float32')
                 img_ndarray = np.reshape(img_ndarray, [128, 96, 3])
                 # print(img_ndarray.shape)
