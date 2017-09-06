@@ -3,6 +3,7 @@ import os
 import numpy as np
 from PIL import Image
 import tensorflow as tf
+import datetime
 
 dir = "./roads_128/";
 
@@ -11,7 +12,7 @@ dir = "./roads_128/";
 batch_size = 10
 
 # # Network Parameters
-n_classes = 4 # MNIST total classes (0-9 digits)
+n_classes = 5 # MNIST total classes (0-9 digits)
 dropout = 0.75 # Dropout, probability to keep units
 
 # # tf Graph input
@@ -135,7 +136,7 @@ with tf.Session() as sess:
                 # print(img_ndarray.shape)
                 batch_x = img_ndarray
                 batch_xs.append(batch_x)
-                batch_y = np.asarray([0, 0, 0, 0])
+                batch_y = np.asarray([0, 0, 0, 0, 0])
                 batch_y[int(score)] = 1
                 # print(batch_y)
                 batch_y = np.reshape(batch_y, [4, ])
@@ -152,7 +153,8 @@ with tf.Session() as sess:
             loss, acc = sess.run([cost, accuracy], feed_dict={x: batch_xs,
                                                               y_: batch_ys,
                                                               keep_prob: 1.})
-            print("count:" + str(count) + "/" + str(total_count) + ", step:" + str(step) + "/" + str(total_page) + ", Minibatch Loss= " + \
+            ctime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S");
+            print(ctime + "\tcount:" + str(count) + "/" + str(total_count) + ", step:" + str(step) + "/" + str(total_page) + ", Minibatch Loss= " + \
                   "{:.6f}".format(loss) + ", Training Accuracy= " + \
                   "{:.5f}".format(acc))
             step += 1
