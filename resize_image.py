@@ -1,8 +1,12 @@
 from PIL import Image
 import os
 
-src = './roads_temp/';
+src = './roads_128/';
 dest = './roads_128/'
+
+# src = './roads_temp/';
+# dest = './roads_temp_128/'
+
 # dest = './roads_256/'
 # dest = './roads_300/'
 
@@ -19,9 +23,10 @@ for image in list:
     # print(ext)
 
     img = Image.open(src + image)
-    wpercent = (basewidth / float(img.size[0]))
-    hsize = int((float(img.size[1]) * float(wpercent)))
-    out = img.resize((basewidth, hsize))
-    # out.show()
-    out.save(dest + name + ext)
+    if img.size[0] == 640:
+        wpercent = (basewidth / float(img.size[0]))
+        hsize = int((float(img.size[1]) * float(wpercent)))
+        out = img.resize((basewidth, hsize))
+        # out.show()
+        out.save(dest + name + ext)
 
