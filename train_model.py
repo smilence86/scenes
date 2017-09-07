@@ -9,7 +9,7 @@ dir = "./roads_128/";
 
 
 # # Parameters
-batch_size = 5
+batch_size = 10
 
 # # Network Parameters
 n_classes = 5 # MNIST total classes (0-9 digits)
@@ -150,9 +150,10 @@ with tf.Session() as sess:
 
             sess.run(optimizer, feed_dict={x: batch_xs, y_: batch_ys, keep_prob: dropout})
             # Calculate batch loss and accuracy
-            loss, acc = sess.run([cost, accuracy], feed_dict={x: batch_xs, y_: batch_ys, keep_prob: 1.});
-            ctime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S");
-            print(ctime + "\tbatch:" + str(batch) + "/" + str(total_batch) + ", page:" + str(index + 1) + "/" + str(total_page) + ", Minibatch Loss= " + \
+            if index % 5 == 0:
+                loss, acc = sess.run([cost, accuracy], feed_dict={x: batch_xs, y_: batch_ys, keep_prob: 1.});
+                ctime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S");
+                print(ctime + "\tbatch:" + str(batch) + "/" + str(total_batch) + ", page:" + str(index + 1) + "/" + str(total_page) + ", Minibatch Loss= " + \
                   "{:.6f}".format(loss) + ", Training Accuracy= " + \
                   "{:.5f}".format(acc))
     print("Optimization Finished!")
