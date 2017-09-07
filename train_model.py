@@ -115,7 +115,7 @@ with tf.Session() as sess:
     print('总页数：', total_page);
     #训练批次
     count = 0
-    total_count = 30
+    total_count = 15
     while count < total_count:
         count += 1;
         print("count:", count)
