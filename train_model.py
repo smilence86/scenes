@@ -114,17 +114,15 @@ with tf.Session() as sess:
     	total_page = int(total_imgs / batch_size) + 1;
     print('总页数：', total_page);
     #训练批次
-    count = 0
-    total_count = 15
-    while count < total_count:
-        count += 1;
-        print("count:", count)
-        step = 1
+    batch = 0
+    total_batch = 15
+    while batch < total_batch:
+        batch += 1;
         for index in range(0, total_page):
-            batch = list[index * batch_size:index * batch_size + batch_size]
+            images = list[index * batch_size:index * batch_size + batch_size]
             batch_xs = []
             batch_ys = []
-            for image in batch:
+            for image in images:
                 id_tag = image.find("-")
                 ext = image.find(".")
                 score = image[id_tag+1:ext]
@@ -154,10 +152,9 @@ with tf.Session() as sess:
             # Calculate batch loss and accuracy
             loss, acc = sess.run([cost, accuracy], feed_dict={x: batch_xs, y_: batch_ys, keep_prob: 1.});
             ctime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S");
-            print(ctime + "\tcount:" + str(count) + "/" + str(total_count) + ", step:" + str(step) + "/" + str(total_page) + ", Minibatch Loss= " + \
+            print(ctime + "\tbatch:" + str(batch) + "/" + str(total_batch) + ", page:" + str(index + 1) + "/" + str(total_page) + ", Minibatch Loss= " + \
                   "{:.6f}".format(loss) + ", Training Accuracy= " + \
                   "{:.5f}".format(acc))
-            step += 1
     print("Optimization Finished!")
     saver.save(sess,"./model/model.ckpt")
 
