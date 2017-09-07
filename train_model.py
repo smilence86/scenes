@@ -9,7 +9,7 @@ dir = "./roads_128/";
 
 
 # # Parameters
-batch_size = 7
+batch_size = 5
 
 # # Network Parameters
 n_classes = 5 # MNIST total classes (0-9 digits)
