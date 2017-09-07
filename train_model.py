@@ -109,7 +109,7 @@ with tf.Session() as sess:
     print('总图片数：', total_imgs);
     total_page = 1;
     if total_imgs % batch_size == 0:
-    	total_page = total_imgs / batch_size;
+    	total_page = int(total_imgs / batch_size);
     else:
     	total_page = int(total_imgs / batch_size) + 1;
     print('总页数：', total_page);
