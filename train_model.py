@@ -9,7 +9,7 @@ dir = "./roads_128/";
 
 
 # # Parameters
-batch_size = 10
+batch_size = 8
 
 # # Network Parameters
 n_classes = 5 # MNIST total classes (0-9 digits)
@@ -108,10 +108,10 @@ with tf.Session() as sess:
     total_imgs = len(list);
     print('总图片数：', total_imgs);
     total_page = 1;
-    if total_imgs % 10 == 0:
-    	total_page = total_imgs / 10;
+    if total_imgs % batch_size == 0:
+    	total_page = total_imgs / batch_size;
     else:
-    	total_page = int(total_imgs / 10) + 1;
+    	total_page = int(total_imgs / batch_size) + 1;
     print('总页数：', total_page);
     #训练批次
     count = 0
