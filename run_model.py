@@ -16,7 +16,7 @@ learning_rate = 0.001
 training_iters = 3000
 
 # Network Parameters
-n_classes = 4 # MNIST total classes (0-9 digits)
+n_classes = 5 # MNIST total classes (0-9 digits)
 dropout = 0.75 # Dropout, probability to keep units
 
 # tf Graph input
@@ -143,7 +143,7 @@ dir = "./roads_test/";
 #上班打卡
 isPunch = False;
 def punchIn(imgPath):
-    url = 'http://xxx.xxx.xxx/xxx/punchin';
+    url = 'http://xxx.xxx.xxx/xxx/xxx';
     files = {'location_image': ('location_image.jpg', open(imgPath, 'rb'))}
     h = datetime.datetime.now().hour
     punch_type = 'on';
@@ -172,43 +172,46 @@ def punchIn(imgPath):
         isPunch = True;
 
 
+sess = tf.Session();
+saver.restore(sess, "./model/model.ckpt")
+
 def run_model(img, img_backup):
     # Launch the graph
-    with tf.Session() as sess:
-        saver.restore(sess, "./model/model.ckpt")
-        # Keep training until reach max iterations
-        # list = os.listdir(dir)
-        # print(list)
-        # print(len(list))
-        # list = ['road_4210-0.jpg', 'road_4220-0.jpg', 'road_4230-0.jpg', 'road_4240-0.jpg', 'road_4250-0.jpg', 'road_4260-0.jpg', 'road_4270-0.jpg', 'road_4285-1.jpg', 'road_4290-1.jpg', 'road_4390-0.jpg'];
-        batch_xs = []
-        batch_ys = []
-        if type(img) == type('a'):
-            img = Image.open(dir + img)
-        img_ndarray = np.asarray(img, dtype='float32')
-        img_ndarray = np.reshape(img_ndarray, [128, 96, 3])
-        # print(img_ndarray.shape)
-        batch_x = img_ndarray
-        batch_xs.append(batch_x)
+    # with tf.Session() as sess:
+    # saver.restore(sess, "./model/model.ckpt")
+    # Keep training until reach max iterations
+    # list = os.listdir(dir)
+    # print(list)
+    # print(len(list))
+    # list = ['road_4210-0.jpg', 'road_4220-0.jpg', 'road_4230-0.jpg', 'road_4240-0.jpg', 'road_4250-0.jpg', 'road_4260-0.jpg', 'road_4270-0.jpg', 'road_4285-1.jpg', 'road_4290-1.jpg', 'road_4390-0.jpg'];
+    batch_xs = []
+    batch_ys = []
+    if type(img) == type('a'):
+        img = Image.open(dir + img)
+    img_ndarray = np.asarray(img, dtype='float32')
+    img_ndarray = np.reshape(img_ndarray, [128, 96, 3])
+    # print(img_ndarray.shape)
+    batch_x = img_ndarray
+    batch_xs.append(batch_x)
 
-        # print(batch_ys)
-        batch_xs = np.asarray(batch_xs)
-        print(batch_xs.shape)
+    # print(batch_ys)
+    batch_xs = np.asarray(batch_xs)
+    print(batch_xs.shape)
 
-        # Run optimization op (backprop)
-        pred_result_test = sess.run(pred_result, feed_dict={x: batch_xs, keep_prob: 1.})
-        print(pred_result_test)
-        ctime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S");
-        if(0 in pred_result_test):
-            print(ctime + ' 检测到特征图片：');
-            # img_backup.show();
-            imgPath = './backup/' + ctime + '.jpg';
-            # img_backup.save(imgPath);
-            #打卡
-            # punchIn(imgPath);
-        else:
-            print(ctime + ' .........');
-            # img.show();
+    # Run optimization op (backprop)
+    pred_result_test = sess.run(pred_result, feed_dict={x: batch_xs, keep_prob: 1.})
+    print(pred_result_test)
+    ctime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S");
+    if(0 not in pred_result_test):
+        print(ctime + ' 检测到特征图片：');
+        # img_backup.show();
+        imgPath = './backup/' + ctime + '.jpg';
+        # img_backup.save(imgPath);
+        #打卡
+        # punchIn(imgPath);
+    else:
+        print(ctime + ' .........');
+        # img.show();
 
 
 def resize_img(img):
@@ -247,5 +250,6 @@ def recognition(url):
 
 # recognition('http://192.168.43.1:8080/shot.jpg');
 # recognition('http://172.20.10.2:8080/shot.jpg');
-run_model('2017-08-14 14:52:53.jpg', None);
+run_model('2017-08-18 08:49:24.jpg', None);
 # punchIn('./backup/2017-08-14 14:52:56.jpg');
+
