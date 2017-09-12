@@ -115,7 +115,7 @@ with tf.Session() as sess:
     print('总页数：', total_page);
     #训练批次
     batch = 0
-    total_batch = 15
+    total_batch = 40
     while batch < total_batch:
         batch += 1;
         for index in range(0, total_page):

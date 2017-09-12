@@ -1,11 +1,11 @@
 from PIL import Image
 import os
 
-src = './roads_128/';
-dest = './roads_128/'
+# src = './roads_128/';
+# dest = './roads_128/'
 
-# src = './roads_temp/';
-# dest = './roads_temp_128/'
+src = './roads_temp/';
+dest = './roads_128/'
 
 # dest = './roads_256/'
 # dest = './roads_300/'

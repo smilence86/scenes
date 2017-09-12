@@ -146,9 +146,13 @@ def punchIn(imgPath):
     url = 'http://xxx.xxx.xxx/xxx/xxx';
     files = {'location_image': ('location_image.jpg', open(imgPath, 'rb'))}
     h = datetime.datetime.now().hour
-    punch_type = 'on';
-    if h > 15:
+    punch_type = '';
+    if h < 10 and number == 1:
+        punch_type = 'on';
+    elif h > 15 and number in [2, 3, 4]:
         punch_type = 'off';
+    if punch_type == '':
+        return;
     data = {
         'company_id': '',
         'user_id': '',
@@ -169,6 +173,7 @@ def punchIn(imgPath):
     print(r.text)
     j = json.loads(r.text)
     if j['data'] == 'TRUE':
+        global isPunch;
         isPunch = True;
 
 
@@ -233,6 +238,7 @@ def recognition(url):
         cv2.setWindowProperty("origin", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
         cv2.imshow('origin', img)
 
+        global isPunch;
         if isPunch == True:
             print(isPunch);
         else:
