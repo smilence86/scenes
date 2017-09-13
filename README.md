@@ -30,3 +30,5 @@ scenes
 
 ### 5、实地检验  
     类似收集数据，执行python run_model.py，把车开到特征地点，检验效果。
+  
+<img src="/public/IMG_3222.PNG" height=480>
