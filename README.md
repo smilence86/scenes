@@ -5,7 +5,7 @@ scenes
 
 4年前上家公司使用传统指纹考勤；  
 3年前同事开发打卡app免去了排队烦恼：
-![打卡app](/public/app_concat_640.jpg?raw=true =579x480)
+<img src="/public/app_concat_640.jpg" width=579>
 
 现在我用机器学习实现全自动打卡，tensorflow训练一个CNN模型教它看图认识不同地方，就像教小孩看图认识猫、狗、鱼、虫，让机器软件拥有认知判断能力。
 
